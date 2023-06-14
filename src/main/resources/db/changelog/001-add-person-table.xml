@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    <changeSet id="001-duke" author="duke">
+        <createTable tableName="persons">
+            <column name="person_id" type="uuid">
+                <constraints primaryKey="true"
+                             primaryKeyName="persons_pk"/>
+            </column>
+            <column name="passport_number" type="varchar(10)" >
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="first_name" type="varchar(255)"/>
+            <column name="surname" type="varchar(255)"/>
+            <column name="patronymic" type="varchar(255)"/>
+            <column name="birth_date" type="date"/>
+            <column name="start_driving_date" type="date"/>
+            <column name="driver_category" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
