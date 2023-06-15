@@ -5,6 +5,8 @@ import com.duke.carpark.dto.CarWithPersonDto;
 import com.duke.carpark.dto.PersonDto;
 import com.duke.carpark.dto.PersonWithCarsDto;
 import com.duke.carpark.exceptions.ServerException;
+import com.duke.carpark.services.CarService;
+import com.duke.carpark.services.PersonService;
 import com.duke.carpark.services.impl.CarServiceImpl;
 import com.duke.carpark.services.impl.PersonServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +22,8 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:8085")
 @RequiredArgsConstructor
 public class RestController {
-    private final PersonServiceImpl personService;
-    private final CarServiceImpl carService;
+    private final PersonService personService;
+    private final CarService carService;
 
     @GetMapping(value = "persons")
     public List<PersonDto> getAllPersons() {
