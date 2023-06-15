@@ -7,8 +7,6 @@ import com.duke.carpark.dto.PersonWithCarsDto;
 import com.duke.carpark.exceptions.ServerException;
 import com.duke.carpark.services.CarService;
 import com.duke.carpark.services.PersonService;
-import com.duke.carpark.services.impl.CarServiceImpl;
-import com.duke.carpark.services.impl.PersonServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
