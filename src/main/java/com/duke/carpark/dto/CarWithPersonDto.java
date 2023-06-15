@@ -1,6 +1,7 @@
 package com.duke.carpark.dto;
 
 import com.duke.carpark.entity.Person;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.Data;
 
 import java.util.UUID;

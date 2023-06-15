@@ -1,5 +1,6 @@
 package com.duke.carpark.entity;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
