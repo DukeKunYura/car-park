@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import com.duke.carpark.dto.CarDto;
 import com.duke.carpark.dto.CarWithPersonDto;
-import io.swagger.v3.oas.annotations.Hidden;
 
 public interface CarService {
 

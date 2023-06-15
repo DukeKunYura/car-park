@@ -1,6 +1,5 @@
 package com.duke.carpark.dto;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import lombok.Data;
 
 import java.time.LocalDate;

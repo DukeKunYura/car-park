@@ -7,10 +7,7 @@ import com.duke.carpark.mappers.PersonMapper;
 import com.duke.carpark.repository.PersonRepository;
 import com.duke.carpark.services.PersonService;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
