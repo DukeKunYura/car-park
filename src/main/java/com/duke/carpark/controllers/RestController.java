@@ -34,16 +34,26 @@ public class RestController {
 
     @GetMapping(value = "person")
     @Operation(summary = "person by ID", description = "get person by ID")
-    public PersonDto gerPersonById(
-            @RequestParam(name = "id") UUID id) {
-        return personService.getPersonById(id);
+    public ResponseEntity<PersonDto> getPersonById(
+            @RequestParam(name = "id", required = false) UUID id) {
+        try {
+            PersonDto personDto = personService.getPersonById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(personDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping(value = "person_with_cars")
     @Operation(summary = "person with cars by ID", description = "get person with cars by ID")
-    public PersonWithCarsDto getPersonWithCarsById(
-            @RequestParam(name = "id") UUID id) {
-        return personService.getPersonWithCarsById(id);
+    public ResponseEntity<PersonWithCarsDto> getPersonWithCarsById(
+            @RequestParam(name = "id", required = false) UUID id) {
+        try {
+            PersonWithCarsDto person = personService.getPersonWithCarsById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(person);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @GetMapping(value = "cars")
@@ -54,9 +64,14 @@ public class RestController {
 
     @GetMapping(value = "car")
     @Operation(summary = "car by ID", description = "get car by ID")
-    public CarDto gerCarById(
-            @RequestParam(name = "id") UUID id) {
-        return carService.getCarById(id);
+    public ResponseEntity<CarDto> getCarById(
+            @RequestParam(name = "id", required = false) UUID id) {
+        try {
+            CarDto carDto = carService.getCarById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(carDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
     @PostMapping(path = "person", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

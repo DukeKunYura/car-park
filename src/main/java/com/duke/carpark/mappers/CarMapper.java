@@ -28,7 +28,9 @@ public class CarMapper {
         dto.setModel(car.getModel());
         dto.setVin(car.getVin());
         PersonMapper personMapper = new PersonMapper();
-        dto.setPerson(personMapper.toDto(car.getPerson()));
+        if (car.getPerson() != null) {
+            dto.setPerson(personMapper.toDto(car.getPerson()));
+        }
         return dto;
     }
 

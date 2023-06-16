@@ -8,4 +8,6 @@
     <include file="002-add-car-table.xml" relativeToChangelogFile="true"/>
     <include file="003-add-detail-table.xml" relativeToChangelogFile="true"/>
     <include file="004-add-account-table.xml" relativeToChangelogFile="true"/>
+    <include file="005-add-person-column.xml" relativeToChangelogFile="true"/>
+    <include file="006-add-car-column.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>
