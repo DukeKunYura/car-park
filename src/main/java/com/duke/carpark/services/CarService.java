@@ -12,5 +12,5 @@ public interface CarService {
 
     public CarDto getCarById(UUID id);
 
-    public void addCar(CarDto newCar);
+    public CarDto addCar(CarDto newCar);
 }

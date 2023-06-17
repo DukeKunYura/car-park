@@ -38,13 +38,14 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonWithCarsDto getPersonWithCarsById(UUID id) {
-        Person person = personRepository.findById(id).orElseThrow();
+        Person person = personRepository.findPersonById(id);
         return personMapper.toDtoWithCars(person);
     }
 
     @Override
-    public void addPerson(PersonDto dto) {
+    public PersonDto addPerson(PersonDto dto) {
         Person person = personMapper.toEntity(dto);
-        personRepository.save(person);
+        Person newPerson = personRepository.save(person);
+        return personMapper.toDto(newPerson);
     }
 }

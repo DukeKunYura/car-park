@@ -32,13 +32,14 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarDto getCarById(UUID id) {
-        Car car = carRepository.findById(id).orElseThrow();
+        Car car = carRepository.findCarById(id);
         return carMapper.toDto(car);
     }
 
     @Override
-    public void addCar(CarDto dto) {
+    public CarDto addCar(CarDto dto) {
         Car car = carMapper.toEntity(dto);
-        carRepository.save(car);
+         Car newCar = carRepository.save(car);
+        return carMapper.toDto(newCar);
     }
 }

@@ -14,5 +14,5 @@ public interface PersonService {
 
     public PersonWithCarsDto getPersonWithCarsById(UUID id);
 
-    public void addPerson(PersonDto newPerson);
+    public PersonDto addPerson(PersonDto newPerson);
 }
