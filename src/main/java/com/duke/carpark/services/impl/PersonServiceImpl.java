@@ -4,6 +4,7 @@ import com.duke.carpark.dto.PersonDto;
 import com.duke.carpark.dto.PersonWithCarsDto;
 import com.duke.carpark.dto.PersonWithoutIdDto;
 import com.duke.carpark.entity.Person;
+import com.duke.carpark.filters.PersonFilter;
 import com.duke.carpark.mappers.PersonMapper;
 import com.duke.carpark.repository.PersonRepository;
 import com.duke.carpark.services.PersonService;
@@ -29,6 +30,12 @@ public class PersonServiceImpl implements PersonService {
             personsListDto.add(personMapper.toDto(person));
         }
         return personsListDto;
+    }
+
+    @Override
+    public List<PersonDto> getPersonsByFilter(PersonFilter filter) {
+        List<Person> persons = personRepository.findPersonsByFilter(filter);
+        return personMapper.toDtoPersonsList(persons);
     }
 
     @Override

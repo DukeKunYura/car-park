@@ -7,6 +7,9 @@ import com.duke.carpark.dto.PersonWithoutIdDto;
 import com.duke.carpark.entity.Person;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class PersonMapper {
     public PersonDto toDto(Person person) {
@@ -75,5 +78,13 @@ public class PersonMapper {
         person.setStartDrivingDate(dto.getStartDrivingDate());
         person.setDriverCategory(dto.getDriverCategory());
         return person;
+    }
+
+    public List<PersonDto> toDtoPersonsList(List<Person> persons) {
+        List<PersonDto> personsListDto = new ArrayList<>();
+        for (Person person : persons) {
+            personsListDto.add(this.toDto(person));
+        }
+        return personsListDto;
     }
 }

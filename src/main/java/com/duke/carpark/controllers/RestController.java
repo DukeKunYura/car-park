@@ -2,6 +2,7 @@ package com.duke.carpark.controllers;
 
 import com.duke.carpark.dto.*;
 import com.duke.carpark.exceptions.ServerException;
+import com.duke.carpark.filters.PersonFilter;
 import com.duke.carpark.services.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +28,34 @@ public class RestController {
     private final DetailService detailService;
     private final CarDetailService carDetailService;
     private final PersonAccountService personAccountService;
+
+    // получение всех водителей соответсвующих фильтрам
+    @GetMapping(value = "persons_with_params")
+    @Operation(summary = "all persons with params", description = "get all persons with params")
+    public List<PersonDto> getPersonsByFilter(
+            @RequestParam(name = "name", required = false) String firstName,
+            @RequestParam(name = "surname", required = false) String surname,
+            @RequestParam(name = "patronymic", required = false) String patronymic,
+            @RequestParam(name = "birth_date", required = false) LocalDate birthDate,
+            @RequestParam(name = "min_age", required = false) String minAge,
+            @RequestParam(name = "max_age", required = false) String maxAge,
+            @RequestParam(name = "min_experience", required = false) String minExperience,
+            @RequestParam(name = "max_experience", required = false) String maxExperience) {
+        PersonFilter filter = new PersonFilter();
+        filter.setFirstName(firstName);
+        filter.setSurname(surname);
+        filter.setPatronymic(patronymic);
+        filter.setBirthDate(birthDate);
+        if (minAge != null) {filter.setMinAgeDate(LocalDate.now()
+                .minusYears(Integer.parseInt(minAge)));}
+        if (maxAge != null) {filter.setMaxAgeDate(LocalDate.now()
+                .minusYears(Integer.parseInt(maxAge)+1));}
+        if (minExperience != null) {filter.setMinStartDrivingDate(LocalDate.now()
+                .minusYears(Integer.parseInt(minExperience)));}
+        if (maxExperience != null) {filter.setMaxStartDrivingDate(LocalDate.now()
+                .minusYears(Integer.parseInt(maxExperience)+1));}
+        return personService.getPersonsByFilter(filter);
+    }
 
     // получение всех водителей
     @GetMapping(value = "persons")
@@ -59,7 +89,7 @@ public class RestController {
     @GetMapping(value = "person")
     @Operation(summary = "person by ID", description = "get person by ID")
     public ResponseEntity<PersonDto> getPersonById(
-            @RequestParam(name = "id", required = false) UUID id) {
+            @RequestParam(name = "id", required = true) UUID id) {
         try {
             PersonDto personDto = personService.getPersonById(id);
             return ResponseEntity.status(HttpStatus.OK).body(personDto);
@@ -72,7 +102,7 @@ public class RestController {
     @GetMapping(value = "person_with_cars")
     @Operation(summary = "person with cars by ID", description = "get person with cars by ID")
     public ResponseEntity<PersonWithCarsDto> getPersonWithCarsById(
-            @RequestParam(name = "id", required = false) UUID id) {
+            @RequestParam(name = "id", required = true) UUID id) {
         try {
             PersonWithCarsDto person = personService.getPersonWithCarsById(id);
             return ResponseEntity.status(HttpStatus.OK).body(person);
@@ -85,7 +115,7 @@ public class RestController {
     @GetMapping(value = "car")
     @Operation(summary = "car by ID", description = "get car by ID")
     public ResponseEntity<CarDto> getCarById(
-            @RequestParam(name = "id", required = false) UUID id) {
+            @RequestParam(name = "id", required = true) UUID id) {
         try {
             CarDto carDto = carService.getCarById(id);
             return ResponseEntity.status(HttpStatus.OK).body(carDto);
