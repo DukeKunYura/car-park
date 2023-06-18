@@ -8,4 +8,4 @@ JPA unit tests were written for testing the application.
 The application's functionality is available in Swagger:
 http:// localhost port/swagger-ui/index.html
 
-![screen](https://github.com/DukeKunYura/car-park/blob/master/crs/main/resources/img/2023-06-18.png)
+![screen](https://github.com/DukeKunYura/car-park/blob/master/src/main/resources/img/2023-06-18.png)
