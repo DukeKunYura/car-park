@@ -6,4 +6,5 @@ import java.util.UUID;
 
 public interface PersonAccountService {
     PersonWithAccountsDto addPersonAccount(UUID personId, UUID accountId);
+    PersonWithAccountsDto removePersonAccount(UUID personId, UUID accountId);
 }

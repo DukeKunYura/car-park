@@ -168,4 +168,32 @@ public class RestController {
         PersonWithAccountsDto person = personAccountService.addPersonAccount(personId, accountId);
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
+
+    // удаление авто у водителя по их ID
+    @DeleteMapping(path = "remove_person_car")
+    @Operation(summary = "remove person car", description = "remove car from person")
+    public ResponseEntity<PersonWithCarsDto> removePersonCarById(@RequestParam(name = "person") UUID personId,
+                                                              @RequestParam(name = "car") UUID carId) {
+        PersonWithCarsDto person = personCarService.removePersonCar(personId, carId);
+        return new ResponseEntity<>(person, HttpStatus.OK);
+    }
+
+    // удаление детали из автомобиля по их ID
+    @DeleteMapping(path = "remove_car_detail")
+    @Operation(summary = "remove car detail", description = "remove detail from car")
+    public ResponseEntity<CarWithDetailsDto> removeCarDetailById(@RequestParam(name = "car") UUID carId,
+                                                              @RequestParam(name = "detail") UUID detailId) {
+        CarWithDetailsDto car = carDetailService.removeCarDetail(carId, detailId);
+        return new ResponseEntity<>(car, HttpStatus.OK);
+    }
+
+    // удаление счета водителя по их ID
+    @DeleteMapping(path = "remove_person_account")
+    @Operation(summary = "remove person account", description = "remove account from person")
+    public ResponseEntity<PersonWithAccountsDto> removePersonAccountById(@RequestParam(name = "person") UUID personId,
+                                                                      @RequestParam(name = "account") UUID accountId) {
+        PersonWithAccountsDto person = personAccountService.removePersonAccount(personId, accountId);
+        return new ResponseEntity<>(person, HttpStatus.OK);
+    }
+
 }

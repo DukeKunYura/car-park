@@ -6,4 +6,6 @@ import java.util.UUID;
 
 public interface CarDetailService {
     CarWithDetailsDto addCarDetail(UUID carId, UUID detailId);
+    CarWithDetailsDto removeCarDetail(UUID carId, UUID detailId);
+
 }

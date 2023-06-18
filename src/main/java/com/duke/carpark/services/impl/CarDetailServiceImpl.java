@@ -29,4 +29,14 @@ public class CarDetailServiceImpl implements CarDetailService {
 
         return carMapper.toDtoWithDetails(car);
     };
+
+    @Override
+    public CarWithDetailsDto removeCarDetail(UUID carId, UUID detailId) {
+        Car car = carRepository.findCarById(carId);
+        Detail detail = detailRepository.findDetailById(detailId);
+        car.removeDetail(detail);
+        carRepository.save(car);
+
+        return carMapper.toDtoWithDetails(car);
+    };
 }

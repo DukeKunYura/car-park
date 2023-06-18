@@ -6,5 +6,6 @@ import java.util.UUID;
 
 public interface PersonCarService {
 
-    public PersonWithCarsDto addPersonCar(UUID personId, UUID carId);
+    PersonWithCarsDto addPersonCar(UUID personId, UUID carId);
+    PersonWithCarsDto removePersonCar(UUID personId, UUID carId);
 }

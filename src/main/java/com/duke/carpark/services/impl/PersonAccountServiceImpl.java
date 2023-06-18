@@ -28,4 +28,14 @@ public class PersonAccountServiceImpl implements PersonAccountService {
 
         return personMapper.toDtoWithAccounts(person);
     };
+
+    @Override
+    public PersonWithAccountsDto removePersonAccount(UUID personId, UUID accountId) {
+        Person person = personRepository.findPersonById(personId);
+        Account account = accountRepository.findAccountById(accountId);
+        person.removeAccount(account);
+        personRepository.save(person);
+
+        return personMapper.toDtoWithAccounts(person);
+    };
 }

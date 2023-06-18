@@ -29,5 +29,15 @@ public class PersonCarServiceImpl implements PersonCarService {
         return personMapper.toDtoWithCars(person);
     };
 
+    @Override
+    public PersonWithCarsDto removePersonCar(UUID personId, UUID carId) {
+        Person person = personRepository.findPersonById(personId);
+        Car car = carRepository.findCarById(carId);
+        person.removeCar(car);
+        personRepository.save(person);
+
+        return personMapper.toDtoWithCars(person);
+    };
+
 
 }
