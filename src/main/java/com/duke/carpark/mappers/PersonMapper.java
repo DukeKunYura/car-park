@@ -1,6 +1,7 @@
 package com.duke.carpark.mappers;
 
 import com.duke.carpark.dto.PersonDto;
+import com.duke.carpark.dto.PersonWithAccountsDto;
 import com.duke.carpark.dto.PersonWithCarsDto;
 import com.duke.carpark.entity.Person;
 import org.springframework.stereotype.Component;
@@ -32,6 +33,21 @@ public class PersonMapper {
         dto.setDriverCategory(person.getDriverCategory());
         CarMapper carMapper = new CarMapper();
         dto.setCars(carMapper.toDtoCarsList(person.getCars()));
+        return dto;
+    }
+
+    public PersonWithAccountsDto toDtoWithAccounts(Person person) {
+        PersonWithAccountsDto dto = new PersonWithAccountsDto();
+        dto.setId(person.getId());
+        dto.setPassportNumber(person.getPassportNumber());
+        dto.setFirstName(person.getFirstName());
+        dto.setSurname(person.getSurname());
+        dto.setPatronymic(person.getPatronymic());
+        dto.setBirthDate(person.getBirthDate());
+        dto.setStartDrivingDate(person.getStartDrivingDate());
+        dto.setDriverCategory(person.getDriverCategory());
+        AccountMapper accountMapper = new AccountMapper();
+        dto.setAccounts(accountMapper.toDtoAccountsList(person.getAccounts()));
         return dto;
     }
 

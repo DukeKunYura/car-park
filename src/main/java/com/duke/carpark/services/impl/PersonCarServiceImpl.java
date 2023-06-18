@@ -3,8 +3,6 @@ package com.duke.carpark.services.impl;
 import com.duke.carpark.dto.PersonWithCarsDto;
 import com.duke.carpark.entity.Car;
 import com.duke.carpark.entity.Person;
-import com.duke.carpark.exceptions.ServerException;
-import com.duke.carpark.mappers.CarMapper;
 import com.duke.carpark.mappers.PersonMapper;
 import com.duke.carpark.repository.CarRepository;
 import com.duke.carpark.repository.PersonRepository;
@@ -12,8 +10,6 @@ import com.duke.carpark.services.PersonCarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -22,7 +18,6 @@ public class PersonCarServiceImpl implements PersonCarService {
     private final PersonRepository personRepository;
     private final PersonMapper personMapper;
     private final CarRepository carRepository;
-    private final CarMapper carMapper;
 
     @Override
     public PersonWithCarsDto addPersonCar(UUID personId, UUID carId) {

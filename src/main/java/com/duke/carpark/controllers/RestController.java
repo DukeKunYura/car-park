@@ -1,13 +1,8 @@
 package com.duke.carpark.controllers;
 
-import com.duke.carpark.dto.CarDto;
-import com.duke.carpark.dto.CarWithPersonDto;
-import com.duke.carpark.dto.PersonDto;
-import com.duke.carpark.dto.PersonWithCarsDto;
+import com.duke.carpark.dto.*;
 import com.duke.carpark.exceptions.ServerException;
-import com.duke.carpark.services.CarService;
-import com.duke.carpark.services.PersonCarService;
-import com.duke.carpark.services.PersonService;
+import com.duke.carpark.services.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +22,37 @@ public class RestController {
     private final PersonService personService;
     private final CarService carService;
     private final PersonCarService personCarService;
+    private final AccountService accountService;
+    private final DetailService detailService;
+    private final CarDetailService carDetailService;
+    private final PersonAccountService personAccountService;
 
     // получение всех водителей
     @GetMapping(value = "persons")
     @Operation(summary = "all persons", description = "get all persons")
     public List<PersonDto> getAllPersons() {
         return personService.getAllPersons();
+    }
+
+    // получение всех автомобилей
+    @GetMapping(value = "cars")
+    @Operation(summary = "all cars", description = "get all cars")
+    public List<CarWithPersonDto> getAllCars() {
+        return carService.getAllCarsWithPerson();
+    }
+
+    // получение всех счетов
+    @GetMapping(value = "accounts")
+    @Operation(summary = "all accounts", description = "get all accounts")
+    public List<AccountDto> getAllAccounts() {
+        return accountService.getAllAccounts();
+    }
+
+    // получение всех деталей
+    @GetMapping(value = "details")
+    @Operation(summary = "all details", description = "get all details")
+    public List<DetailDto> getAllDetails() {
+        return detailService.getAllDetails();
     }
 
     // получение водителя по ID
@@ -59,13 +79,6 @@ public class RestController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-    }
-
-    // получение всех автомобилей
-    @GetMapping(value = "cars")
-    @Operation(summary = "all cars", description = "get all cars")
-    public List<CarWithPersonDto> getAllCars() {
-        return carService.getAllCarsWithPerson();
     }
 
     // получение автомобиля по ID
@@ -105,12 +118,54 @@ public class RestController {
         }
     }
 
+    // добавление детали
+    @PostMapping(path = "detail", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "add detail", description = "add new detail")
+    public ResponseEntity<DetailDto> addCar(@RequestBody DetailDto newDetail) {
+        if (newDetail == null) {
+            throw new ServerException();
+        } else {
+            DetailDto detail = detailService.addDetail(newDetail);
+            return new ResponseEntity<>(detail, HttpStatus.CREATED);
+        }
+    }
+
+    // добавление счета
+    @PostMapping(path = "account", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(summary = "add account", description = "add new account")
+    public ResponseEntity<AccountDto> addAccount(@RequestBody AccountDto newAccount) {
+        if (newAccount == null) {
+            throw new ServerException();
+        } else {
+            AccountDto account = accountService.addAccount(newAccount);
+            return new ResponseEntity<>(account, HttpStatus.CREATED);
+        }
+    }
+
     // добавление авто водителю по их ID
     @PutMapping(path = "add_person_car")
     @Operation(summary = "add person car", description = "add car to person")
     public ResponseEntity<PersonWithCarsDto> addPersonCarById(@RequestParam(name = "person") UUID personId,
                                                    @RequestParam(name = "car") UUID carId) {
         PersonWithCarsDto person = personCarService.addPersonCar(personId, carId);
+        return new ResponseEntity<>(person, HttpStatus.OK);
+    }
+
+    // добавление детали автомобилю по их ID
+    @PutMapping(path = "add_car_detail")
+    @Operation(summary = "add car detail", description = "add detail to car")
+    public ResponseEntity<CarWithDetailsDto> addCarDetailById(@RequestParam(name = "car") UUID carId,
+                                                              @RequestParam(name = "detail") UUID detailId) {
+        CarWithDetailsDto car = carDetailService.addCarDetail(carId, detailId);
+        return new ResponseEntity<>(car, HttpStatus.OK);
+    }
+
+    // добавление счета водителю по их ID
+    @PutMapping(path = "add_person_account")
+    @Operation(summary = "add person account", description = "add account to person")
+    public ResponseEntity<PersonWithAccountsDto> addPersonAccountById(@RequestParam(name = "person") UUID personId,
+                                                              @RequestParam(name = "account") UUID accountId) {
+        PersonWithAccountsDto person = personAccountService.addPersonAccount(personId, accountId);
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 }

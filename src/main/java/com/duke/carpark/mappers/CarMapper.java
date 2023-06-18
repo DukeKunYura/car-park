@@ -1,6 +1,7 @@
 package com.duke.carpark.mappers;
 
 import com.duke.carpark.dto.CarDto;
+import com.duke.carpark.dto.CarWithDetailsDto;
 import com.duke.carpark.dto.CarWithPersonDto;
 import com.duke.carpark.entity.Car;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,18 @@ public class CarMapper {
         if (car.getPerson() != null) {
             dto.setPerson(personMapper.toDto(car.getPerson()));
         }
+        return dto;
+    }
+
+    public CarWithDetailsDto toDtoWithDetails(Car car) {
+        CarWithDetailsDto dto = new CarWithDetailsDto();
+        dto.setId(car.getId());
+        dto.setNumber(car.getNumber());
+        dto.setVin(car.getVin());
+        dto.setBrand(car.getBrand());
+        dto.setModel(car.getModel());
+        DetailMapper detailMapper = new DetailMapper();
+        dto.setDetails(detailMapper.toDtoDetailsList(car.getDetails()));
         return dto;
     }
 

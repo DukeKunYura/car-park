@@ -9,4 +9,5 @@ import java.util.UUID;
 @Hidden
 @Repository
 public interface DetailRepository extends JpaRepository<Detail, UUID> {
+    Detail findDetailById(UUID id);
 }
