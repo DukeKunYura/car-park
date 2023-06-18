@@ -1,6 +1,7 @@
 package com.duke.carpark.mappers;
 
 import com.duke.carpark.dto.AccountDto;
+import com.duke.carpark.dto.AccountWithoutIdDto;
 import com.duke.carpark.entity.Account;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,14 @@ public class AccountMapper {
     public Account toEntity(AccountDto dto) {
         Account account = new Account();
         account.setId(dto.getId());
+        account.setNumber(dto.getNumber());
+        account.setTitle(dto.getTitle());
+        account.setScore(dto.getScore());
+        return account;
+    }
+
+    public Account toEntityWithoutId(AccountWithoutIdDto dto) {
+        Account account = new Account();
         account.setNumber(dto.getNumber());
         account.setTitle(dto.getTitle());
         account.setScore(dto.getScore());

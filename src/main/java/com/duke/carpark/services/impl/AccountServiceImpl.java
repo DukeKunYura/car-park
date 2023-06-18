@@ -1,6 +1,7 @@
 package com.duke.carpark.services.impl;
 
 import com.duke.carpark.dto.AccountDto;
+import com.duke.carpark.dto.AccountWithoutIdDto;
 import com.duke.carpark.entity.Account;
 import com.duke.carpark.mappers.AccountMapper;
 import com.duke.carpark.repository.AccountRepository;
@@ -30,8 +31,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto addAccount(AccountDto dto) {
-        Account account = accountMapper.toEntity(dto);
+    public AccountDto addAccount(AccountWithoutIdDto dto) {
+        Account account = accountMapper.toEntityWithoutId(dto);
         Account newAccount = accountRepository.save(account);
         return accountMapper.toDto(newAccount);
     }

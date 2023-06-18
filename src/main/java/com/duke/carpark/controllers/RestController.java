@@ -97,7 +97,7 @@ public class RestController {
     // добавление водителя
     @PostMapping(path = "person", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "add person", description = "add new person")
-    public ResponseEntity<PersonDto> addPerson(@RequestBody PersonDto newPerson) {
+    public ResponseEntity<PersonDto> addPerson(@RequestBody PersonWithoutIdDto newPerson) {
         if (newPerson == null) {
             throw new ServerException();
         } else {
@@ -109,7 +109,7 @@ public class RestController {
     // добавление автомобиля
     @PostMapping(path = "car", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "add car", description = "add new car")
-    public ResponseEntity<CarDto> addCar(@RequestBody CarDto newCar) {
+    public ResponseEntity<CarDto> addCar(@RequestBody CarWithoutIdDto newCar) {
         if (newCar == null) {
             throw new ServerException();
         } else {
@@ -121,7 +121,7 @@ public class RestController {
     // добавление детали
     @PostMapping(path = "detail", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "add detail", description = "add new detail")
-    public ResponseEntity<DetailDto> addCar(@RequestBody DetailDto newDetail) {
+    public ResponseEntity<DetailDto> addCar(@RequestBody DetailWithoutIdDto newDetail) {
         if (newDetail == null) {
             throw new ServerException();
         } else {
@@ -133,7 +133,7 @@ public class RestController {
     // добавление счета
     @PostMapping(path = "account", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "add account", description = "add new account")
-    public ResponseEntity<AccountDto> addAccount(@RequestBody AccountDto newAccount) {
+    public ResponseEntity<AccountDto> addAccount(@RequestBody AccountWithoutIdDto newAccount) {
         if (newAccount == null) {
             throw new ServerException();
         } else {

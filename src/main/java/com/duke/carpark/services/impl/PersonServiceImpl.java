@@ -2,6 +2,7 @@ package com.duke.carpark.services.impl;
 
 import com.duke.carpark.dto.PersonDto;
 import com.duke.carpark.dto.PersonWithCarsDto;
+import com.duke.carpark.dto.PersonWithoutIdDto;
 import com.duke.carpark.entity.Person;
 import com.duke.carpark.mappers.PersonMapper;
 import com.duke.carpark.repository.PersonRepository;
@@ -43,8 +44,8 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public PersonDto addPerson(PersonDto dto) {
-        Person person = personMapper.toEntity(dto);
+    public PersonDto addPerson(PersonWithoutIdDto dto) {
+        Person person = personMapper.toEntityWithoutId(dto);
         Person newPerson = personRepository.save(person);
         return personMapper.toDto(newPerson);
     }

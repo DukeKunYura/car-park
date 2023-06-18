@@ -1,6 +1,7 @@
 package com.duke.carpark.mappers;
 
 import com.duke.carpark.dto.DetailDto;
+import com.duke.carpark.dto.DetailWithoutIdDto;
 import com.duke.carpark.entity.Detail;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,14 @@ public class DetailMapper {
     public Detail toEntity(DetailDto dto) {
         Detail detail = new Detail();
         detail.setId(dto.getId());
+        detail.setTitle(dto.getTitle());
+        detail.setSerialNumber(dto.getSerialNumber());
+        detail.setPrice(dto.getPrice());
+        return detail;
+    }
+
+    public Detail toEntityWithoutId(DetailWithoutIdDto dto) {
+        Detail detail = new Detail();
         detail.setTitle(dto.getTitle());
         detail.setSerialNumber(dto.getSerialNumber());
         detail.setPrice(dto.getPrice());

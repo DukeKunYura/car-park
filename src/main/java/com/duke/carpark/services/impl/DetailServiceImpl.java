@@ -1,6 +1,7 @@
 package com.duke.carpark.services.impl;
 
 import com.duke.carpark.dto.DetailDto;
+import com.duke.carpark.dto.DetailWithoutIdDto;
 import com.duke.carpark.entity.Detail;
 import com.duke.carpark.mappers.DetailMapper;
 import com.duke.carpark.repository.DetailRepository;
@@ -30,8 +31,8 @@ public class DetailServiceImpl implements DetailService {
     }
 
     @Override
-    public DetailDto addDetail(DetailDto dto) {
-        Detail detail = detailMapper.toEntity(dto);
+    public DetailDto addDetail(DetailWithoutIdDto dto) {
+        Detail detail = detailMapper.toEntityWithoutId(dto);
         Detail newDetail = detailRepository.save(detail);
         return detailMapper.toDto(newDetail);
     }

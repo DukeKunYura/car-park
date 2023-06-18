@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.duke.carpark.dto.PersonDto;
 import com.duke.carpark.dto.PersonWithCarsDto;
+import com.duke.carpark.dto.PersonWithoutIdDto;
 
 public interface PersonService {
 
@@ -14,5 +15,5 @@ public interface PersonService {
 
     public PersonWithCarsDto getPersonWithCarsById(UUID id);
 
-    public PersonDto addPerson(PersonDto newPerson);
+    public PersonDto addPerson(PersonWithoutIdDto newPerson);
 }

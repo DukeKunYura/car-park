@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.duke.carpark.dto.CarDto;
 import com.duke.carpark.dto.CarWithPersonDto;
+import com.duke.carpark.dto.CarWithoutIdDto;
 
 public interface CarService {
 
@@ -12,5 +13,5 @@ public interface CarService {
 
     public CarDto getCarById(UUID id);
 
-    public CarDto addCar(CarDto newCar);
+    public CarDto addCar(CarWithoutIdDto newCar);
 }
